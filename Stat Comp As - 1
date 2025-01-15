@@ -33,19 +33,32 @@ pmf_values
 mean(sample)
 
 cdf = c(0,cumsum(pmf_values))
-##############################################
+
+pois = function(x){
+  return((exp(-4)*4^x)/factorial(x))
+}
+############################################
 pmf = c(0)
 factorial(170)
 for(i in 0:170)
 {
   pmf = c(pmf,pois(i))
 }
-cumsum(pmf)
+pois_cdf = cumsum(pmf)
 
-
-
-
-
+sample = numeric(length = 1e4)
+for(i in 1:1e4){
+  u = runif(1,0,1)
+  print(u)
+  for(j in 1:11){
+    if(u > cdf[j] & u <= cdf[j+1]){
+      sample[i] = j-1
+      break 
+    }
+  }
+}
+mean(sample)
+var(sample)
 
 
 
