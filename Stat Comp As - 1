@@ -13,3 +13,33 @@ pmf_values <- sapply(k_values, pmf_binomial, n = n, p = p)
 
 # Print the results
 data.frame(k = k_values, PMF = pmf_values)
+
+pmf_values
+pmf_values = c(0,pmf_values)
+
+sample = numeric(length = 1e4)
+for(i in 1:1e4){
+  u = runif(1,0,1)
+  print(u)
+  for(j in 1:11){
+    if(u > cdf[j] & u <= cdf[j+1]){
+      sample[i] = j-1
+      break 
+    }
+  }
+}
+sample
+pmf_values
+mean(sample)
+
+cdf = c(0,cumsum(pmf_values))
+
+
+
+
+
+
+
+
+
+
